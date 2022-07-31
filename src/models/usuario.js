@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 const db = require('../db');
 const Ouvidoria = require('./ouvidoria')
 
-const User = db.define('usuario', {
+const User = db.define('usuarios', {
     username: {
       type: sequelize.CHAR,
       allowNull: false,

@@ -29,20 +29,30 @@ module.exports =
 
   },
 
-  async CreateUser (req, res) {
+  async CreateUser(req, res) {
     const { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf } = req.body;
     const user = { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf }
 
-    try {
-      await User.create(user);
-      
-      res.status(201).json({message: "Usuário criado com sucesso!"})
+    await User.create(user);
 
-    } catch (error) {
+    res.status(201).json({ message: "Usuário criado com sucesso!" })
 
-      res.status(500).json({erro: "Não foi possível criar os dados. Erro: " + error});
-    }
   },
+
+  // async CreateUser (req, res) {
+  //   const { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf } = req.body;
+  //   const user = { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf }
+
+  //   try {
+  //     await User.create(user);
+      
+  //     res.status(201).json({message: "Usuário criado com sucesso!"})
+
+  //   } catch (error) {
+
+  //     res.status(500).json({erro: "Não foi possível criar os dados. Erro: " + error});
+  //   }
+  // },
 
   async UpdateUser (req, res) {
     const id = req.params.username;

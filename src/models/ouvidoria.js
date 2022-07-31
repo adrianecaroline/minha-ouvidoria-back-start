@@ -41,8 +41,7 @@ const Ouvidoria = db.define('ouvidoria', {
   numero: {
     type: DataTypes.NUMBER,
     allowNull: false
-  }, 
-    timestamps: false
+  }
 });
 
 
