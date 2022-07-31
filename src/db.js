@@ -1,13 +1,16 @@
 require('dotenv').config();
 const sequelize = require('sequelize');
+
 const db = new sequelize(process.env.DATABASE, process.env.USER, process.env.PASSWORD, {
   dialect: 'mysql',
   host: process.env.HOST || 'localhost',
-  // port: '3306',
+  define: {
+    timestamps: false
+  },
 }); 
 
 //vai criar a tabela se não existir
-db.sync();
+// db.sync();
 
 module.exports = db;
 

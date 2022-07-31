@@ -15,15 +15,16 @@ module.exports =
   },
 
   async CreateRegister (req, res) {
-    const { idProtocol, usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero } = req.body;
-    const register = { idProtocol, usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero }
+    const { idProtocol, id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero } = req.body;
+    const register = { idProtocol, id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero }
 
     try {
       await Ouvidoria.create(register);
 
       res.status(201).json({message: "Registro criado com sucesso!"})
+
    } catch (error){
-    res.status(500).json({erro: "Não foi possível criar o registro. Erro: " + error});
+      res.status(500).json({erro: "Não foi possível criar o registro. Erro: " + error});
    }
   } 
 }

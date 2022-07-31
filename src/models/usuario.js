@@ -1,11 +1,6 @@
 const sequelize = require('sequelize');
 const db = require('../db');
 const Ouvidoria = require('./ouvidoria')
-// const shema ="";
-
-// class Usuario extends sequelize.Model{
-
-// }
 
 const User = db.define('usuario', {
     username: {
@@ -49,17 +44,17 @@ const User = db.define('usuario', {
     uf: {
       type: sequelize.CHAR(2),
       allowNull: false
-    }
+    },
+    
   }
 )
 
+Ouvidoria.belongsTo(User, {
+  foreignKey: 'id_usuario'
+});
 // User.hasMany(Ouvidoria, {
 //   foreignKey: 'usuario'
 // })
 
-User.hasMany(Ouvidoria, {
-  foreignKey: 'id_usuario'
-});
-Ouvidoria.belongsTo(User);
 
 module.exports = User;
