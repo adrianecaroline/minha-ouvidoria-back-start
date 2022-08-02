@@ -32,6 +32,7 @@ Desenvolvida pelo squad [REACTon](https://github.com/adrianecaroline/minha-ouvid
 * [Express](https://expressjs.com/)
 * [CORS](https://expressjs.com/en/resources/middleware/cors.html)
 * [MySQL2](https://www.npmjs.com/package/mysql2)
+* [Sequelize](https://sequelize.org/) 
 * [dotENV](https://www.npmjs.com/package/dotenv)
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 
