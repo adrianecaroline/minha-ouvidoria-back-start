@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const db = require('../db');
+const db = require('../config/db');
 
 const Condominio = db.define('condominios', {
   id: {
@@ -25,7 +25,7 @@ const Condominio = db.define('condominios', {
     allowNull: false
   },
   senha: {
-    type: DataTypes.CHAR,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   endereco: {

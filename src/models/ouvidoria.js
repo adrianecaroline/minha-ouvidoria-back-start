@@ -1,8 +1,8 @@
 const {sequelize, DataTypes} = require('sequelize');
-const db = require('../db');
+const db = require('../config/db');
 
 const Ouvidoria = db.define('ouvidoria', {
-  idProtocol: {
+  idProtocol: { 
     type: DataTypes.UUID,
     allowNull: false,
     primaryKey: true,

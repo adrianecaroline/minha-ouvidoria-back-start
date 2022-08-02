@@ -1,4 +1,6 @@
 const User = require('../models/usuario');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 module.exports = 
 {
@@ -30,12 +32,30 @@ module.exports =
   },
 
   async CreateUser(req, res) {
+
     const { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf } = req.body;
     const user = { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf }
 
-    await User.create(user);
+    try {
+      const token = jwt.sign(
+        { user_id: user.id, email },
+        process.env.TOKEN_KEY
+      )
+    
+      user.token = token;
 
-    res.status(201).json({ message: "Usuário criado com sucesso!" })
+      user.senha = await bcrypt.hash(user.senha, 8);
+      
+      const newUser = {...user, senha: user.senha, token}
+      console.log(newUser)
+      await User.create(newUser)
+      
+      res.status(201).json(user)
+
+    } catch (err) {
+
+      res.status(500).json({erro: "Não foi possível criar usuário. Erro: " + err}); 
+    }
 
   },
 
@@ -76,8 +96,8 @@ module.exports =
       await User.destroy({ where: {username: id}})
 
       res.status(200).json({message: "Usuário deletado com sucesso!"})
-    } catch {
-      res.status(500).json({erro: "Não foi possível deletar o usuário. Erro: " + error});
+    } catch (erro) {
+      res.status(500).json({erro: "Não foi possível deletar o usuário. Erro: " + erro});
     }
   }
 }

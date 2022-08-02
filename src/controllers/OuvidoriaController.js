@@ -12,8 +12,9 @@ module.exports =
   },
 
   async CreateRegister (req, res) {
-    const { idProtocol, id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero } = req.body;
-    const register = { idProtocol, id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero }
+    const { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero } = req.body;
+    const register = { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero }
+    // console.log(register)
 
     try {
       await Ouvidoria.create(register);

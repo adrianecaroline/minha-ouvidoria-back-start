@@ -1,5 +1,5 @@
 const sequelize = require('sequelize');
-const db = require('../db');
+const db = require('../config/db');
 const Ouvidoria = require('./ouvidoria')
 
 const User = db.define('usuarios', {
@@ -22,7 +22,7 @@ const User = db.define('usuarios', {
       unique: true
     },
     senha: {
-      type: sequelize.CHAR(8),
+      type: sequelize.TEXT,
       allowNull: false
     },
     condominio: {
