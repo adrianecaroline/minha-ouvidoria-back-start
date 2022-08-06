@@ -8,7 +8,24 @@ module.exports =
      
     return res.json(register);
     
-   
+  },
+
+  async UserRegister (req, res) {
+    try {
+      const id = await req.params.id_usuario;
+      console.log(id)
+
+      const usuario = await Ouvidoria.findAll({ where:{id_usuario: id }});
+      
+      if(usuario) {
+        return res.status(200).json(usuario);
+      } else {
+        return res.status(404);
+      }    
+     
+     } catch (error) {
+        res.status(418).json({erro: "Não foi possível receber os dados solicitados. Erro: " + error});
+     }
   },
 
   async CreateRegister (req, res) {

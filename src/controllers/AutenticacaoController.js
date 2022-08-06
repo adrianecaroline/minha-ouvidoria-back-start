@@ -26,8 +26,12 @@ module.exports =
     
       return res.status(200).json({
       user: {
+        username: userExist.username,
         nome: userExist.nome,
-        email: userExist.email
+        email: userExist.email,
+        condominio: userExist.condominio,
+        bloco: userExist.bloco,
+        apto: userExist.apto
       },
       token: jwt.sign(
         {id: userExist.username},

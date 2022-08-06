@@ -18,11 +18,12 @@ module.exports =
   async getOneUser (req, res) {
    
     try {
-     const id = req.params.usuario;
+     const id = req.body.username;
+     console.log("qualquer coisa " + id)
      
      const usuario = await User.findOne({ where:{username: id }});
       
-     res.status(200).send(usuario);
+     return res.status(200).json(usuario);
            
     
     } catch (error) {
