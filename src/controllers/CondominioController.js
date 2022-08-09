@@ -30,13 +30,25 @@ module.exports =
     condomC.senha = await bcrypt.hash(condomC.senha, 8);
     
     const newCondominio = {...condomC, senha: condomC.senha, token}
-    console.log(newCondominio)
+    // console.log(newCondominio)
     await Condominio.create(newCondominio);
 
     // await Condominio.create(condomC);
 
     res.status(201).json({ message: "Condomínio criado com sucesso!" })
+  },
 
+  async DeleteCondominio (req, res){
+    const id = req.params.id;
+
+    try{
+      await Condominio.destroy({ where: {id: id}})
+
+      res.status(200).json({message: "Condomínio deletado com sucesso!"})
+    } catch (error){
+
+      res.status(500).json({erro: "Não foi possível deletar o condomínio cadastrado. Erro: " + error});
+    }
   }
 }
 

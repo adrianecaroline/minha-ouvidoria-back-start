@@ -19,7 +19,7 @@ module.exports =
    
     try {
      const id = req.body.username;
-     console.log("qualquer coisa " + id)
+    //  console.log("qualquer coisa " + id)
      
      const usuario = await User.findOne({ where:{username: id }});
       
@@ -48,7 +48,7 @@ module.exports =
       user.senha = await bcrypt.hash(user.senha, 8);
       
       const newUser = {...user, senha: user.senha, token}
-      console.log(newUser)
+      // console.log(newUser)
       await User.create(newUser)
       
       res.status(201).json(user)

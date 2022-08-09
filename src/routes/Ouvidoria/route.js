@@ -2,6 +2,8 @@ const express = require('express');
 const OuvidoriaController = require('../../controllers/OuvidoriaController');
 const routes = express.Router();
 const Auth = require("../../middleware/auth")
+const multer = require('../../config/multer')
+
 
 routes.get('/ouvidoria/registers', OuvidoriaController.ListRegisters);
 
@@ -12,7 +14,8 @@ routes.get('/ouvidoria/registers/:id_usuario', OuvidoriaController.UserRegister,
 
 // routes.post('/register', OuvidoriaController.CreateRegister);
 routes.delete('/ouvidoria/:idProtocol', OuvidoriaController.DeleteRegister);
-routes.post('/register/auth', OuvidoriaController.CreateRegister, async (req, res) => {
+
+routes.post('/register/auth', multer.single('url'), OuvidoriaController.CreateRegister, async (req, res) => {
   const auth = await Auth({username: req.id}, res);
   return auth;
 });

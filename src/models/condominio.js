@@ -22,7 +22,8 @@ const Condominio = db.define('condominios', {
   },
   email: {
     type: DataTypes.CHAR,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   senha: {
     type: DataTypes.TEXT,

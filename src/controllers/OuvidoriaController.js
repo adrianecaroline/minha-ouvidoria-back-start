@@ -29,8 +29,8 @@ module.exports =
   },
 
   async CreateRegister (req, res) {
-    const { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero } = req.body;
-    const register = { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero }
+    const { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero, file_url } = req.body;
+    const register = { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero, file_url }
     // console.log(register)
 
     try {

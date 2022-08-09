@@ -11,7 +11,7 @@ const Auth = require('../../middleware/auth')
 routes.get('/users', usuarioController.ListUsuarios);
 
 routes.get('/user/:username', Auth, async (req, res) => {
-  console.log(req.identify)
+  // console.log(req.identify)
   const auth = await usuarioController.getOneUser({username: req.identify}, res);
   return auth;
 });

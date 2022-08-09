@@ -41,6 +41,9 @@ const Ouvidoria = db.define('ouvidoria', {
   numero: {
     type: DataTypes.NUMBER,
     allowNull: false
+  },
+  file_url: {
+    type: DataTypes.STRING,
   }
 });
 
