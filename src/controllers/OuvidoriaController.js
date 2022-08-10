@@ -28,6 +28,24 @@ module.exports =
      }
   },
 
+  async ListParams (req, res) {
+    try {
+      const id = await req.params.registro;
+      console.log(id)
+
+      const registro = await Ouvidoria.findAll({ where:{tipo_registro: id }});
+      
+      if(registro) {
+        return res.status(200).json(registro);
+      } else {
+        return res.status(404);
+      }    
+     
+     } catch (error) {
+        res.status(418).json({erro: "Não foi possível receber os dados solicitados. Erro: " + error});
+     }
+  },
+
   async CreateRegister (req, res) {
     const { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero, file_url } = req.body;
     const register = { id_usuario, tipo_registro, assunto_registro, titulo, descricao, endereco, numero, file_url }

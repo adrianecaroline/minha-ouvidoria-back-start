@@ -12,6 +12,11 @@ routes.get('/ouvidoria/registers/:id_usuario', OuvidoriaController.UserRegister,
   return auth;
 } );
 
+routes.get('/ouvidoria/registro/:registro', async (req, res) => {
+  const registro = await OuvidoriaController.ListParams (req, res);
+  return registro;
+} );
+
 // routes.post('/register', OuvidoriaController.CreateRegister);
 routes.delete('/ouvidoria/:idProtocol', OuvidoriaController.DeleteRegister);
 
