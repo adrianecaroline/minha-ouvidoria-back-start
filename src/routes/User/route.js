@@ -16,9 +16,16 @@ routes.get('/user/:username', Auth, async (req, res) => {
   return auth;
 });
 
+routes.get('/userByToken', Auth, async (req, res) => {
+  console.log(req.identify)
+  const auth = await usuarioController.getUser({username: req.identify});
+  return res.json(auth);
+});
+
+
 // routes.get('/user/:username', usuarioController.getOneUser);
 routes.post('/user', usuarioController.CreateUser);
 routes.put('/user/:username', usuarioController.UpdateUser);
 routes.delete('/user/:username', usuarioController.DeleteUser);
 
-module.exports = routes;
+module.exports = routes; 

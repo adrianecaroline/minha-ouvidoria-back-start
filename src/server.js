@@ -10,6 +10,7 @@ const AuthController = require('./routes/Autenticação/route');
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('public'));
 
 app.use(UserRoute);
 app.use(OuvidoriaRoute);

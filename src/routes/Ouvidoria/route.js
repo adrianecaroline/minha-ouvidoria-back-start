@@ -20,7 +20,7 @@ routes.delete('/ouvidoria/:idProtocol', OuvidoriaController.DeleteRegister);
 //   return auth;
 // });
 
-routes.post('/register/auth', multer.single('url'), async (req, res) => {
+routes.post('/register/auth', multer.single('url'), OuvidoriaController.CreateRegister, async (req, res) => {
 	const {username, registro, selection, titulo, descricao, endereco, numero, url } = req.body
 	return res.json({username, registro, selection, titulo, descricao, endereco, numero, url})
 });

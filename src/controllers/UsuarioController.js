@@ -32,10 +32,27 @@ module.exports =
 
   },
 
+  async getUser (values) {
+   
+    try {
+     const {username} = values;
+
+     const usuario = await User.findOne({ where:{username: username }});
+      
+     return {usuario: usuario};
+           
+    } catch (error) {
+      return  {erro: "Deu algum erro..."}
+    }
+
+  },
+
   async CreateUser(req, res) {
 
     const { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf } = req.body;
     const user = { username, nome, dtNasci, email, senha, condominio, bloco, apto, cep, uf }
+
+    console.log(req.body)
 
     try {
       const token = jwt.sign(
@@ -77,7 +94,7 @@ module.exports =
 
   async UpdateUser (req, res) {
     const id = req.params.username;
-    const { nome, dtNasci, email, senha } = req.body;
+    const { nome, condominio, bloco, apto } = req.body;
 
     try {
       await User.update(req.body, {where: {username: id}})

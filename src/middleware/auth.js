@@ -17,7 +17,7 @@ function verifyToken (req, res, next) {
     return res.status(401).json("Token Inválido")
   }
 
-  return next();
+  next();
 };
 
 module.exports = verifyToken;
