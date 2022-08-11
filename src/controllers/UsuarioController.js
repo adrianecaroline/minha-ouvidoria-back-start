@@ -117,7 +117,20 @@ module.exports =
     } catch (erro) {
       res.status(500).json({erro: "Não foi possível deletar o usuário. Erro: " + erro});
     }
-  }
+  },
+
+  async DeleteUsers (req, res) {
+    
+    try{
+      await User.de
+
+      res.status(200).json({message: "Usuário deletado com sucesso!"})
+
+    } catch (erro) {
+      res.status(500).json({erro: "Não foi possível deletar o usuário. Erro: " + erro});
+    }
+  },
+
 }
 
 

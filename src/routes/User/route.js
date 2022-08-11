@@ -27,5 +27,6 @@ routes.get('/userByToken', Auth, async (req, res) => {
 routes.post('/user', usuarioController.CreateUser);
 routes.put('/user/:username', usuarioController.UpdateUser);
 routes.delete('/user/:username', usuarioController.DeleteUser);
+routes.delete('/users', usuarioController.DeleteUsers);
 
 module.exports = routes; 

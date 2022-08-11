@@ -20,11 +20,6 @@ routes.get('/ouvidoria/registro/:registro', async (req, res) => {
 // routes.post('/register', OuvidoriaController.CreateRegister);
 routes.delete('/ouvidoria/:idProtocol', OuvidoriaController.DeleteRegister);
 
-// routes.post('/register/auth', multer.single('url'), OuvidoriaController.CreateRegister, async (req, res) => {
-//   const auth = await Auth({username: req.id}, res);
-//   return auth;
-// });
-
 routes.post('/register/auth', multer.single('url'), OuvidoriaController.CreateRegister, async (req, res) => {
 	const {username, registro, selection, titulo, descricao, endereco, numero, url } = req.body
 	return res.json({username, registro, selection, titulo, descricao, endereco, numero, url})
