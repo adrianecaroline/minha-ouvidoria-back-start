@@ -1,4 +1,5 @@
 const User = require('../models/usuario');
+const Ouvidoria = require('../models/ouvidoria')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -111,9 +112,15 @@ module.exports =
     const id = req.params.username;
 
     try{
-      await User.destroy({ where: {username: id}})
+     const ouvidoria = await Ouvidoria.destroy( {where: {id_usuario: id}})
+     const user = await User.destroy({ where: {username: id}})
 
-      res.status(200).json({message: "Usuário deletado com sucesso!"})
+      if(ouvidoria) {
+        res.status(409).json({ message: "ok " })
+      } else if (user){
+        res.status(200).json({message: "Usuário deletado com sucesso!"})
+      }
+      
     } catch (erro) {
       res.status(500).json({erro: "Não foi possível deletar o usuário. Erro: " + erro});
     }
