@@ -17,6 +17,10 @@ app.use(OuvidoriaRoute);
 app.use(CondominioRoute);
 app.use(AuthController);
 
-app.listen(process.env.SERVER_PORT, (req, res) => {
+app.get('/', async(req,res)=>{
+  return res.json('vc entrou na rota principal')
+})
+
+app.listen(process.env.PORT || 4200, '0.0.0.0', (req, res) => {
   console.log(`Conectado na porta ${process.env.SERVER_PORT}`);
 });
