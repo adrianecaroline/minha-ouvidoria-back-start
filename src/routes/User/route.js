@@ -30,7 +30,7 @@ routes.post('/email-teste', async (req,res)=> {
     transport.sendMail({
       from: process.env.EMAIL,
       to: email,
-      subject: 'Message',
+      subject: 'Redefinição de Senha',
       html: "<a href="+`${process.env.ENTIRE_URL}/change-pass/${token}`+">clique aqui para mudar a senha</a>"
     })
 
@@ -47,7 +47,7 @@ routes.get('/change-pass/:token', async (req, res) => {
 
   const data = jwt.verify(token, process.env.TOKEN_KEY)
 
-  const newPass = await usuarioController.UpdatePass({where: {email: data.email, senha: data.novaSenha}});
+  const newPass = await usuarioController.UpdatePass({email: data.email, senha: data.novaSenha});
   
   return res.json({data, newPass})
   
