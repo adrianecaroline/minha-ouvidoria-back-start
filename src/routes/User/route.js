@@ -31,7 +31,7 @@ routes.post('/email-teste', async (req,res)=> {
       from: process.env.EMAIL,
       to: email,
       subject: 'Redefinição de Senha',
-      html: "<a href="+`${process.env.ENTIRE_URL}/change-pass/${token}`+">clique aqui para mudar a senha</a>"
+      html: "<a href="+`${process.env.ENTIRE_URL}change-pass/${token}`+">clique aqui para mudar a senha</a>"
     })
 
     return res.json('email foi') 
