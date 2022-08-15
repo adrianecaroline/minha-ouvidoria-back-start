@@ -30,7 +30,7 @@ module.exports =
 
   async ListParams (req, res) {
     try {
-      const id = await req.params.registro;
+      const id = await req.body.tipo_registro;
       console.log(id)
 
       const registro = await Ouvidoria.findAll({ where:{tipo_registro: id }});

@@ -1,5 +1,6 @@
 const User = require("../models/usuario");
 const Ouvidoria = require("../models/ouvidoria");
+const Authentic = require("../controllers/AutenticacaoController");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -49,24 +50,28 @@ module.exports = {
     console.log(req.body);
 
     try {
-      const token = jwt.sign(
-        { user_id: user.id, email },
-        process.env.TOKEN_KEY
-      );
+      if (await Authentic.findUser({email: email}, res)) {
 
-      user.token = token;
+        res.status(203).json({ messagem: "Usuário já cadastrado na plataforma"});
 
-      user.senha = await bcrypt.hash(user.senha, 8);
-
-      const newUser = { ...user, senha: user.senha, token };
-      // console.log(newUser)
-      await User.create(newUser);
-
-      res.status(201).json(user);
+      } else {
+        const token = jwt.sign(
+          { user_id: user.id, email },
+          process.env.TOKEN_KEY
+        );
+  
+        user.token = token;
+  
+        user.senha = await bcrypt.hash(user.senha, 8);
+  
+        const newUser = { ...user, senha: user.senha, token };
+        // console.log(newUser)
+        await User.create(newUser);
+  
+        res.status(201).json(user);
+      }
     } catch (err) {
-      res
-        .status(500)
-        .json({ erro: "Não foi possível criar usuário. Erro: " + err });
+      //res.status(500).json({ erro: "Não foi possível criar usuário. Erro: " + err });
     }
   },
 
@@ -79,9 +84,7 @@ module.exports = {
 
       res.status(201).json({ message: "Dados do usuário atualizados!" });
     } catch {
-      res
-        .status(500)
-        .json({ erro: "Não foi possível atualizar os dados. Erro: " + error });
+      res.status(500).json({ erro: "Não foi possível atualizar os dados. Erro: " + error });
     }
   },
 
@@ -98,9 +101,7 @@ module.exports = {
         res.status(200).json({ message: "Usuário deletado com sucesso!" });
       }
     } catch (erro) {
-      res
-        .status(500)
-        .json({ erro: "Não foi possível deletar o usuário. Erro: " + erro });
+      res.status(500).json({ erro: "Não foi possível deletar o usuário. Erro: " + erro });
     }
   },
 
@@ -110,14 +111,13 @@ module.exports = {
 
       res.status(200).json({ message: "Usuário deletado com sucesso!" });
     } catch (erro) {
-      res
-        .status(500)
-        .json({ erro: "Não foi possível deletar o usuário. Erro: " + erro });
+      res.status(500).json({ erro: "Não foi possível deletar o usuário. Erro: " + erro });
     }
   },
 
   async UpdatePass({ email, senha }) {
     try {
+
       const Pass = await bcrypt.hash(senha, 8);
       const newPass = await User.update(
         { senha: Pass},

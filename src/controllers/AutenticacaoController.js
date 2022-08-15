@@ -1,5 +1,5 @@
 const User = require('../models/usuario');
-const Condominio = require('../models/condominio')
+const Condominio = require('../models/condominio');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 
@@ -9,10 +9,6 @@ module.exports =
     const { email, senha } = req.body;
 
     const userExist = await User.findOne({where: {email}});
-
-    // console.log(userExist.senha)
-    // console.log(senha)
-    // console.log(await bcrypt.compare(senha, userExist.senha))
 
     if(!userExist) {
       return res.status(400).json({error: true, message: "Falha na autenticação do usuário."});
@@ -45,8 +41,6 @@ module.exports =
 
     const condominioExist = await Condominio.findOne({where: {email}});
 
-    // console.log(condominioExist)
-
     if(!condominioExist) {
       return res.status(400).json({error: true, message: "Falha na autenticação do usuário."});
       
@@ -67,5 +61,21 @@ module.exports =
         process.env.TOKEN_KEY
       )
     })
+  },
+
+  async findUser (req, res) {
+    console.log(req)
+    const  email  = req.email;
+    const findUserEmail = await User.findOne({email: email});
+    const findCondominioEmail = await Condominio.findOne({email: email});
+
+    let emailExist = false;
+    console.log(findUserEmail)
+    console.log(findCondominioEmail)
+
+    if(findUserEmail || findCondominioEmail) {
+      emailExist = true;
+    }
+    return (emailExist);
   }
 }

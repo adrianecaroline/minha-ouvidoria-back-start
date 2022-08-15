@@ -12,7 +12,8 @@ routes.get('/ouvidoria/registers/:id_usuario', OuvidoriaController.UserRegister,
   return auth;
 } );
 
-routes.get('/ouvidoria/registro/:registro', async (req, res) => {
+routes.post('/ouvidoria/registro/', async (req, res) => {
+  console.log(req.body);
   const registro = await OuvidoriaController.ListParams (req, res);
   return registro;
 } );
