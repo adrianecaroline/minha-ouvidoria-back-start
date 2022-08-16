@@ -61,21 +61,21 @@ module.exports =
         process.env.TOKEN_KEY
       )
     })
-  },
-
-  async findUser (req, res) {
-    console.log(req)
-    const  email  = req.email;
-    const findUserEmail = await User.findOne({email: email});
-    const findCondominioEmail = await Condominio.findOne({email: email});
-
-    let emailExist = false;
-    console.log(findUserEmail)
-    console.log(findCondominioEmail)
-
-    if(findUserEmail || findCondominioEmail) {
-      emailExist = true;
-    }
-    return (emailExist);
   }
+
+  // async findUser (req, res) {
+  //   console.log(req)
+  //   const  email  = req.email;
+  //   const findUserEmail = await User.findOne({email: email});
+  //   const findCondominioEmail = await Condominio.findOne({email: email});
+
+  //   let emailExist = false;
+  //   console.log(findUserEmail)
+  //   console.log(findCondominioEmail)
+
+  //   if(findUserEmail || findCondominioEmail) {
+  //     emailExist = true;
+  //   }
+  //   return (emailExist);
+  // }
 }

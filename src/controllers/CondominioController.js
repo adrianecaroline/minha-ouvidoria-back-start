@@ -1,5 +1,5 @@
 const Condominio = require('../models/condominio');
-const Authentic = require("../controllers/AutenticacaoController");
+// const Authentic = require("../controllers/AutenticacaoController");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -22,11 +22,6 @@ module.exports =
     const condomC = { razao_social, cnpj, nome_condominio, email, senha, endereco, cep, numero, uf  }
 
     try {
-      if(await Authentic.findUser({email: email}, res)) {
-
-        res.status(203).json({ messagem: "Usuário já cadastrado na plataforma"});
-
-      } else {
         const token = jwt.sign(
           { user_id: condomC.id, email },
           process.env.TOKEN_KEY
@@ -42,8 +37,8 @@ module.exports =
   
         res.status(201).json({ message: "Condomínio criado com sucesso!" })
       }
-    } catch (err) {
-      //res.status(500).json({erro: "Não foi possível criar condominio. Erro: " + err}); 
+     catch (err) {
+      res.status(500).json({erro: "Não foi possível criar condominio. Erro: " + err}); 
     }
 
 

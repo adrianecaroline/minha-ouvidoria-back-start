@@ -1,6 +1,6 @@
 const User = require("../models/usuario");
 const Ouvidoria = require("../models/ouvidoria");
-const Authentic = require("../controllers/AutenticacaoController");
+// const Authentic = require("../controllers/AutenticacaoController");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -50,11 +50,6 @@ module.exports = {
     console.log(req.body);
 
     try {
-      if (await Authentic.findUser({email: email}, res)) {
-
-        res.status(203).json({ messagem: "Usuário já cadastrado na plataforma"});
-
-      } else {
         const token = jwt.sign(
           { user_id: user.id, email },
           process.env.TOKEN_KEY
@@ -70,8 +65,8 @@ module.exports = {
   
         res.status(201).json(user);
       }
-    } catch (err) {
-      //res.status(500).json({ erro: "Não foi possível criar usuário. Erro: " + err });
+     catch (err) {
+      res.status(500).json({ erro: "Não foi possível criar usuário. Erro: " + err });
     }
   },
 
